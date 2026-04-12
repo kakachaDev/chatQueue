@@ -1,0 +1,24 @@
+{
+  "schedule": [
+    {
+      "day": 1,
+      "time": "10:00",
+      "text": "good morning ☀️\n\ntoday is a great day to do something small but meaningful."
+    },
+    {
+      "day": 1,
+      "time": "21:00",
+      "text": "evening reminder:\n\nyou did fine today. that counts."
+    },
+    {
+      "day": 2,
+      "time": "12:00",
+      "text": "day 2 post — supports plain text with line breaks.\n\nHTML tags also work: <b>bold</b>, <i>italic</i>, <code>code</code>."
+    }
+  ],
+  "notes": [
+    "day: 1 maps to start_date in config.json, day: 2 is the next day, etc.",
+    "time: publication time in Moscow timezone (MSK, UTC+3)",
+    "text: supports newlines (\\n) and HTML tags (<b>, <i>, <code>, <a href=...>)"
+  ]
+}
