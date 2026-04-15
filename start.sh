@@ -2,13 +2,21 @@
 set -e
 cd "$(dirname "$0")"
 
+# Останавливаем watchdog, если запущен
+if [ -f watchdog.pid ] && kill -0 "$(cat watchdog.pid)" 2>/dev/null; then
+    echo "Stopping old watchdog (PID $(cat watchdog.pid))..."
+    kill "$(cat watchdog.pid)"
+    sleep 1
+fi
+
+# Останавливаем бот, если запущен
 if [ -f bot.pid ] && kill -0 "$(cat bot.pid)" 2>/dev/null; then
-    echo "Stopping old instance (PID $(cat bot.pid))..."
+    echo "Stopping old bot (PID $(cat bot.pid))..."
     kill "$(cat bot.pid)"
     sleep 1
 fi
 
-rm -f bot.pid
+rm -f watchdog.pid bot.pid
 
 # Запускаем watchdog-цикл: бот перезапускается автоматически при падении
 (
@@ -19,5 +27,5 @@ rm -f bot.pid
     done
 ) &
 
-echo $! > bot.pid
-echo "Bot started (PID $(cat bot.pid))"
+echo $! > watchdog.pid
+echo "Bot started (watchdog PID $(cat watchdog.pid))"

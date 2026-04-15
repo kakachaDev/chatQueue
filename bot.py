@@ -43,13 +43,11 @@ LOG_FILE = BASE_DIR / "bot.log"
 PID_FILE = BASE_DIR / "bot.pid"
 MOSCOW_TZ = ZoneInfo("Europe/Moscow")
 
-# Логирование: stdout + ротируемый файл (5 МБ × 3 файла)
+# Логирование: ротируемый файл (5 МБ × 3 файла)
 _fmt = logging.Formatter("%(asctime)s  %(levelname)s  %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 _file_handler = RotatingFileHandler(LOG_FILE, maxBytes=5 * 1024 * 1024, backupCount=3, encoding="utf-8")
 _file_handler.setFormatter(_fmt)
-_stream_handler = logging.StreamHandler()
-_stream_handler.setFormatter(_fmt)
-logging.basicConfig(level=logging.INFO, handlers=[_file_handler, _stream_handler])
+logging.basicConfig(level=logging.INFO, handlers=[_file_handler])
 log = logging.getLogger(__name__)
 
 
